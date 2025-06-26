@@ -176,8 +176,8 @@ class RoomsEnv(gym.Env):
         params = self.grid_params
 
         # find rooms of the states
-        r1 = (s1//params.partition_size).astype(np.int)
-        r2 = (s2//params.partition_size).astype(np.int)
+        r1 = (s1//params.partition_size).astype(int)
+        r2 = (s2//params.partition_size).astype(int)
 
         # find relative positions within rooms
         p1 = s1 - (r1 * params.partition_size)

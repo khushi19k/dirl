@@ -1,0 +1,7 @@
+t_old = np.linspace(0, 1, len(traj_trim))
+    t_new = np.linspace(0, 1, 10)
+    fx = interp1d(t_old, traj_trim[:, 0], kind='linear', fill_value="extrapolate")
+    fy = interp1d(t_old, traj_trim[:, 1], kind='linear', fill_value="extrapolate")
+    x_new = fx(t_new)
+    y_new = fy(t_new)
+    return np.stack([x_new, y_new], axis=1)

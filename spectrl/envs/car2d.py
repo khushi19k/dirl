@@ -3,10 +3,10 @@ from scipy.stats import truncnorm
 import numpy as np
 import gym
 
-
 class VC_Env(gym.Env):
-    def __init__(self, time_limit, std=0.2):
-        self.state = np.array([5.0, 0.]) + truncnorm.rvs(-1, 1, 0, 0.3, 2)
+    def __init__(self, time_limit,start_pos=0.0,std=0.5):
+        self.start_pos = start_pos
+        self.state = None
         self.time_limit = time_limit
         self.time = 0
         self.std = std
@@ -14,9 +14,9 @@ class VC_Env(gym.Env):
         self.action_space = gym.spaces.Box(-1, 1, shape=(2,))
 
     def reset(self):
-        self.state = np.array([5.0, 0.]) + truncnorm.rvs(-1, 1, 0, 0.3, 2)
+        self.state = np.array([self.start_pos, 0.0], dtype=np.float32)
         self.time = 0
-        return self.state
+        return self.state.copy()
 
     def step(self, action):
         action = action * np.array([0.5, np.pi]) + np.array([0.5, 0.])
